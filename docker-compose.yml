@@ -1,0 +1,11 @@
+version: "3.8"
+
+services:
+  inventory:
+    build: .
+    container_name: inventory-pwa
+    ports:
+      - "8085:80"
+    volumes:
+      - ./config/config.json:/usr/share/nginx/html/config/config.json
+    restart: unless-stopped

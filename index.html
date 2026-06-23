@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Inventory QR / Barcode Generator</title>
+  <link rel="manifest" href="manifest.json">
+
+  <meta name="theme-color" content="#2563eb">
+
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Inventory">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="app-shell">
+    <header class="app-header">
+      <h1>Inventory Code Generator</h1>
+      <p>Create inventory IDs in 4 partitions, add a product name, and generate QR + barcode labels.</p>
+    </header>
+
+    <form id="code-form" class="card">
+      <div class="field-row">
+        <label>Inventory Code</label>
+        <div class="partition-row">
+          <select id="partition1"></select>
+          <span class="dot-separator">.</span>
+          <select id="partition2"></select>
+          <span class="dot-separator">.</span>
+          <select id="partition3"></select>
+          <span class="dot-separator">.</span>
+          <select id="partition4"></select>
+        </div>
+      </div>
+
+      <div class="field-row">
+        <label for="product">Product / Notes</label>
+        <input id="product" type="text" placeholder="Enter product name or description" />
+      </div>
+
+      <div class="button-row">
+        <button type="submit">Generate Code</button>
+        <button id="clear-list" type="button" class="secondary">Clear List</button>
+      </div>
+    </form>
+
+    <section class="preview card">
+      <div class="preview-header">
+        <div>
+          <h2>Generated Labels</h2>
+          <p id="generated-code">A0.090.0001.10</p>
+          <p id="generated-product" class="product-label">Product description appears here</p>
+        </div>
+      </div>
+
+      <div class="label-grid">
+        <div class="label-block">
+          <h3>Location QR</h3>
+          <div id="qr-code-location" class="code-canvas"></div>
+        </div>
+        <div class="label-block">
+          <h3>Location Barcode</h3>
+          <svg id="barcode-location"></svg>
+        </div>
+        <div class="label-block">
+          <h3>Product QR</h3>
+          <div id="qr-code-product" class="code-canvas"></div>
+        </div>
+        <div class="label-block">
+          <h3>Product Barcode</h3>
+          <svg id="barcode-product"></svg>
+        </div>
+      </div>
+    </section>
+
+    <section class="list card">
+      <div class="list-header">
+        <h2>Saved Inventory Codes</h2>
+        <p>Select a code to regenerate labels or remove entries.</p>
+      </div>
+      <ul id="code-list"></ul>
+    </section>
+  </main>
+
+  <script src="qrcode.min.js"></script>
+  <script src="jsbarcode.all.min.js"></script>
+
+  <script src="config/partitions-a0.js"></script>
+  <script src="config/partitions-pu.js"></script>
+
+  <script src="app.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('service-worker.js').catch((error) => {
+          console.warn('Service worker registration failed:', error);
+        });
+      });
+    }
+  </script>
+</body>
+</html>
