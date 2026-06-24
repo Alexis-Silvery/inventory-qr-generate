@@ -80,7 +80,16 @@ function buildCode() {
     partition2.value,
     partition3.value,
     partition4.value
-  ];
+  ].join('');
+}
+
+function buildDisplayCode() {
+  return [
+    partition1.value,
+    partition2.value,
+    partition3.value,
+    partition4.value
+  ].join('.');
 }
 
 /* =========================
@@ -88,8 +97,9 @@ function buildCode() {
 ========================= */
 
 function renderLabels(code, product) {
+  const displayCode = buildDisplayCode();
   const productValue = product || 'PRODUCT';
-
+  generatedCodeEl.textContent = displayCode;
   generatedCodeEl.textContent = code;
   generatedProductEl.textContent = product || 'No product description';
 
