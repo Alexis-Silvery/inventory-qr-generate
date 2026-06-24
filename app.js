@@ -125,18 +125,19 @@ function renderLabels(code, product) {
   });
 
   JsBarcode(barcodeLocationSvg, code, {
-    format: 'CODE128',
-    width: 2,
-    height: 80,
-    displayValue: true,
-    fontSize: 14,
-    margin: 8,
-  });
+  format: 'CODE128',
+  width: 3,              // 🔥 mais grosso
+  height: 120,           // 🔥 mais alto
+  displayValue: true,
+  fontSize: 18,
+  margin: 15,            // 🔥 mais margem
+  background: "#ffffff",
+});
 
   JsBarcode(barcodeProductSvg, productValue, {
     format: 'CODE128',
-    width: 2,
-    height: 80,
+    width: 3,
+    height: 120,
     displayValue: true,
     fontSize: 14,
     margin: 8,
