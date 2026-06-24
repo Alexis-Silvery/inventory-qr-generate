@@ -80,7 +80,7 @@ function buildCode() {
     partition2.value,
     partition3.value,
     partition4.value
-  ].join('.');
+  ];
 }
 
 /* =========================
